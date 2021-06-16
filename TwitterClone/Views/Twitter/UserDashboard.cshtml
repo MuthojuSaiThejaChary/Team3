@@ -1,0 +1,354 @@
+﻿@model TwitterClone.Model.PersonTweetViewModel
+
+@{
+    ViewData["Title"] = "UserDashboard";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    body {
+        background-color: #87CEFA;
+    }
+
+    h1 {
+        position: relative;
+        right: -30%;
+    }
+
+    .abc {
+        position: relative;
+        right: -60%;
+    }
+
+    .b {
+        position: relative;
+        right: -40%;
+        font-size: 50%;
+        color: black;
+    }
+
+    .c {
+        position: relative;
+        right: -25%;
+        font-size: 50%;
+        color: black;
+    }
+
+    .d {
+        position: relative;
+        right: -11%;
+        font-size: 50%;
+        color: black;
+    }
+
+    .text {
+        width: 70%;
+        height: 200px;
+        position: relative;
+        right: -30%;
+    }
+
+    .follow, .example, .a {
+        display: inline-block;
+    }
+
+    .textarea {
+        position: relative;
+        right: -60%;
+    }
+
+    .tweet {
+        position: relative;
+        right: -30%;
+    }
+
+    .button {
+        position: relative;
+        right: -60%;
+        background-color: white;
+    }
+
+    .tweets, .button {
+        display: inline-block;
+    }
+
+    .tweet, .followers {
+        display: inline-block;
+    }
+
+    .tweet {
+        position: relative;
+        right: -24%;
+        font-weight: bold;
+    }
+
+    .followers {
+        position: relative;
+        left: 0%;
+        font-weight: bold;
+    }
+
+    .following {
+        position: relative;
+        left: 0%;
+        font-weight: bold;
+    }
+
+    .tweet {
+        position: relative;
+        left: 0%;
+    }
+
+    .tweets {
+        position: relative;
+        right: -30%;
+        font-weight: bold;
+    }
+
+    table {
+        position: relative;
+        padding: 15px;
+        right: -30%;
+        border: 1px solid black;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+        width: auto;
+    }
+
+    tr:hover {
+        background-color: #f5f5f5;
+    }
+
+    .tweetlist {
+        position: relative;
+        left: -46%;
+    }
+
+    button {
+        float: right;
+        padding: 6px 10px;
+        margin-top: 8px;
+        margin-right: 16px;
+        background: #ddd;
+        font-size: 17px;
+        border: none;
+        cursor: pointer;
+    }
+
+        button:hover {
+            background: #ccc;
+        }
+</style>
+
+<div>
+    <form asp-action="/Twitter/Profile">
+        <input type="text" placeholder="Search.." name="search">
+        <button type="submit" value="Search"></button>
+    </form>
+    <ul id="myUL">
+         @{
+                 foreach (var item in Model.Persons)
+                  {
+                   <li><a href="/Twitter/Details?userid=@item.UserId">@item.Fullname</a></li>
+                }
+          }
+
+        </ul>
+</div>
+@*<div>
+
+        <h6 class="follow">Follow</h6>
+        <br />
+        <input type="text" placeholder="Search.." name="search">
+    </div>*@
+<div>
+    <form class="example" asp-action="UserDashboard">
+        <h6 class="abc">What are you doing?</h6>
+        <br />
+        <textarea class="textarea" asp-for=Tweet.Message rows="4" cols="50"></textarea>
+        <br />
+        <input type="submit" value="Update" class="button">
+    </form>
+</div>
+<div>
+    <h6 class="tweet">@ViewBag.Tweets Tweets</h6>
+    <br />
+    <h6 class="followers">@ViewBag.Followers Followers</h6>
+    <br />
+    <h6 class="following">@ViewBag.Following Following</h6>
+</div>
+<div>
+    <label class="tweets">Tweets</label>
+    <table>
+        <tr>
+            <th>Tweet ID</th>
+            <th>Message</th>
+            <th>Time</th>
+
+        </tr>
+        @foreach (var item in Model.TweetsList)
+        {
+            <tr>
+                <td>@item.TweetId</td>
+                <td>@item.Message</td>
+                <td>@item.Created.ToShortDateString()</td>
+
+            </tr>
+        }
+    </table>
+
+</div>
+
+
+@*<style>
+        body {
+            background-color: #5c9acf;
+        }
+
+        h1 {
+            position: relative;
+            right: -30%;
+        }
+
+        .a {
+            position: relative;
+            right: -40%;
+        }
+
+        .b {
+            position: relative;
+            right: -40%;
+            font-size: 50%;
+            color: black;
+        }
+
+        .c {
+            position: relative;
+            right: -25%;
+            font-size: 50%;
+            color: black;
+        }
+
+        .d {
+            position: relative;
+            right: -11%;
+            font-size: 50%;
+            color: black;
+        }
+
+        .text {
+            width: 70%;
+            height: 200px;
+            position: relative;
+            right: -30%;
+        }
+
+        .follow, .example, .a {
+            display: inline-block;
+        }
+
+        .textarea {
+            position: relative;
+            right: -40%;
+        }
+
+        .tweet {
+            position: relative;
+            right: -30%;
+        }
+
+        .button {
+            position: relative;
+            left: 95%;
+            background-color: white;
+        }
+
+        .tweets, .button {
+            display: inline-block;
+        }
+
+        .tweet, .followers {
+            display: inline-block;
+        }
+
+        .tweet {
+            position: relative;
+            right: -24%;
+            font-weight: bold;
+        }
+
+        .followers {
+            position: relative;
+            left: 0%;
+            font-weight: bold;
+        }
+
+        .following {
+            position: relative;
+            left: 0%;
+            font-weight: bold;
+        }
+
+        .tweet {
+            position: relative;
+            left: 0%;
+        }
+
+        table {
+            position: relative;
+            right: -30%;
+        }
+
+        .tweetlist {
+            position: relative;
+            left: -46%;
+        }
+    </style>
+    <h1>
+        My Twitter Clone
+        <a href="/Twitter/Login" class="b">Signout</a>
+        <a href="/Twitter/Profile" class="c">Profile</a>
+        <a href="/Twitter/UserDashboard" class="d">Home</a>
+    </h1>
+    <br />
+    <h6 class="follow">Follow</h6>
+    <form class="example" action="action_page.php">
+        <input type="text" placeholder="Search.." name="search">
+    </form>
+
+    <div class="table">
+        <form class="example" asp-action="UserDashboard">
+            <h6 class="a">What are you doing?</h6>
+            <br />
+            <textarea class="textarea" asp-for=Tweet.Message rows="4" cols="100"></textarea>
+            <br />
+            <input type="button" value="Update" class="button" />
+            <br />
+        </form>
+    </div>
+    <div>
+        <h6 class="tweet">@ViewBag.Tweets Tweets</h6><br />
+        <h6 class="followers">@ViewBag.Followers Followers</h6>
+        <h6 class="following">@ViewBag.Following Following</h6>
+        <h1 class="tweets">Tweets</h1>
+        <table>
+            <tr>
+                <th>Tweet ID</th>
+                <th>Message</th>
+                <th>Time</th>
+
+            </tr>
+            @foreach (var item in Model.TweetsList)
+            {
+                <tr>
+                    <td>@item.TweetId</td>
+                    <td>@item.Message</td>
+                    <td>@item.Created.Date</td>
+
+                </tr>
+            }
+        </table>
+
+    </div>*@
+
+
+
